@@ -1,12 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Exemplo</title>
 </head>
+
 <body>
-    
+    <h1 id="top">Categorias</h1>
+    <nav>
+        <ul>
+            <li>
+                <a href="#metadata">Metadata Content</a>
+            </li>
+            <li>
+                <a href="#flow">Flow Content</a>
+            </li>
+            <li>
+                <a href="#sectioning">Sectioning Content</a>
+            </li>
+            <li>
+                <a href="#heading">Heading Content</a>
+            </li>
+            <li>
+                <a href="#phrasing">Phrasing Content</a>
+            </li>
+            <li>
+                <a href="#embedded">Embedded Content</a>
+            </li>
+            <li>
+                <a href="#interactive">Interactive Content</a>
+            </li>
+        </ul>
+    </nav>
+    <section>
+        <article>
+            <header>
+                <h2 id="metadata">Metadata Content
+                    <a href="#top">top &uarr;</a>
+                </h2>
+            </header>
+            <p>Conteúdo anterior a apresentação, criando uma relação com o documento e
+                seu conteúdo com outros documentos que
+                distribuem informação por outros meios</p>
+            <ul>
+                <li>base</li>
+                <li>command</li>
+                <li>link</li>
+                <li>meta</li>
+                <li>noscript</li>
+                <li>script</li>
+                <li>style</li>
+                <li>title</li>
+            </ul>
+        </article>
+    </section>
+    <section>
+        <header>
+            <h2 id="flow">Flow Content
+                <a href="#top">top &uarr;</a>
+            </h2>
+        </header>
+        <p>Conteúdo fluxo. Regra: Se o elemento permite inserir qualquer elemento ele é dessa categoria</p>
+        <ul>
+            <li>a</li>
+            <li>abbr</li>
+            <li>address</li>
+            <li>area (se for descendente de um elemento mapa)</li>
+            <li>article</li>
+            <li>aside</li>
+            <li>entre outros</li>
+        </ul>
+    </section>
+    <section>
+        <header>
+            <h2 id="sectioning">Sectioning Content
+                <a href="#top">top &uarr;</a>
+            </h2>
+        </header>
+        <p>Agrupam grupos de textos no documento</p>
+        <ul>
+            <li>article</li>
+            <li>aside</li>
+            <li>nav</li>
+            <li>section</li>
+        </ul>
+    </section>
+    <section>
+        <header>
+            <h2 id="heading">Heading Content
+                <a href="#top">top &uarr;</a>
+            </h2>
+        </header>
+        <p>Definem uma seção de cabeçalhos, podem estar contidos dentro de um elemento da categoria Sectioning</p>
+        <ul>
+            <li>h1 - h6</li>
+            <li>hgroup</li>
+        </ul>
+    </section>
+    <section>
+        <header>
+            <h2 id="phrasing">Phrasing Content
+                <a href="#top">top &uarr;</a>
+            </h2>
+        </header>
+        <p>Elementos que marcam texto</p>
+        <ul>
+            <li>a</li>
+            <li>abbr</li>
+            <li>area (se for descendente de um elemento mapa)</li>
+            <li>audio</li>
+            <li>b</li>
+            <li>bdo</li>
+            <li>br</li>
+            <li>button</li>
+            <li>canvas</li>
+            <li>del (se ele contiver um elemento da categoria Phrasing)</li>
+            <li>ins (se ele contiver um elemento da categoria Phrasing)</li>
+            <li>kbd</li>
+            <li>keygen</li>
+            <li>label</li>
+            <li>entre outros.</li>
+        </ul>
+    </section>
+    <section>
+        <header>
+            <h2 id="embedded">Embedded Content
+                <a href="#top">top &uarr;</a>
+            </h2>
+        </header>
+        <p>Importam outra fonte de informação</p>
+        <ul>
+            <li>audio</li>
+            <li>canvas</li>
+            <li>embed</li>
+            <li>iframe</li>
+            <li>img</li>
+            <li>math</li>
+            <li>object</li>
+            <li>svg</li>
+            <li>video</li>
+        </ul>
+    </section>
+    <section>
+        <header>
+            <h2 id="interactive">Interactive Content
+                <a href="#top">top &uarr;</a>
+            </h2>
+        </header>
+        <p>
+            Conteúdo que permite a interação do usuário Nota: Alguns elementos no HTML podem ser ativados por um comportamento. Isso
+            significa que o usuário pode ativá-lo de alguma forma. O início da sequência de eventos depende do mecanismo
+            de ativação e normalmente culminam em um evento de click seguido pelo evento DOMActivate. O user-agent permite
+            que o usuário ative manualmente o elemento que tem este comportamento utilizando um teclado, mouse, comando de
+            voz, etc.
+        </p>
+        <ul>
+            <li>a</li>
+            <li>audio (se o atributo
+                <code>control</code> for utilizado</li>
+            <li>button</li>
+            <li>details</li>
+            <li>embed</li>
+            <li>iframe</li>
+            <li>img (se o atributo
+                <code>usemap</code> for utilizado</li>
+            <li>input (se o atributo
+                <code>type</code> não tiver o valor
+                <code>hidden</code>
+            </li>
+            <li>keygen</li>
+            <li>label</li>
+            <li>menu(se o atributo
+                <code>type</code> tiver o valor
+                <code>toolbar</code>
+            </li>
+            <li>object (se o atributo
+                <code>usemap</code> for utilizado</li>
+            <li>select</li>
+            <li>textarea</li>
+            <li>video (se o atributo
+                <code>control</code> for utilizado</li>
+        </ul>
+    </section>
 </body>
+
 </html>
