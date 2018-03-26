@@ -30,22 +30,35 @@
             btnMultiplicar.addEventListener("click", multiplicar);
             btnDividir.addEventListener("click", dividir);
             
+            // ao carregar a página tenta pegar os valores
             var a = Number.parseInt(valorA.value);
             var b = Number.parseInt(valorB.value);
 
             function somar() {
+                // utiliza os valores do carregamento
+                // os valores não são atualizados
+                // a e b contém NaN (Not a Number)
                 result.innerHTML = a + b;
             }
 
             function subtrair() {
+                // utiliza os valores do carregamento
+                // os valores não são atualizados
+                // a e b contém NaN (Not a Number)
                 result.innerHTML = a - b;
             }
 
             function multiplicar() {
+                // utiliza os valores do carregamento
+                // os valores não são atualizados
+                // a e b contém NaN (Not a Number)
                 result.innerHTML = a * b;
             }
 
             function dividir() {
+                // utiliza os valores do carregamento
+                // os valores não são atualizados
+                // a e b contém NaN (Not a Number)
                 result.innerHTML = a / b;
             }
         </script>
