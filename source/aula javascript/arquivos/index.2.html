@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Qualquer</title>
+    </head>
+    <body>
+        <input type="text" id="valorA" />
+        <input type="text" id="valorB" />
+        <input type="button" id="btnSomar" value="Somar">
+        <input type="button" id="btnSubtrair" value="Subtrair">
+        <input type="button" id="btnMultiplicar" value="Multiplicar">
+        <input type="button" id="btnDividir" value="Dividir">
+        <div>O resultado é: <span id="result"></span></div>
+        <script>
+            var valorA = document.getElementById("valorA");
+            var valorB = document.getElementById("valorB");
+
+            var btnSomar = document.getElementById("btnSomar");
+            var btnSubtrair = document.getElementById("btnSubtrair");
+            var btnMultiplicar = document.getElementById("btnMultiplicar");
+            var btnDividir = document.getElementById("btnDividir");
+
+            var result = document.getElementById("result");
+
+            btnSomar.addEventListener("click", somar);
+            btnSubtrair.addEventListener("click", subtrair);
+            btnMultiplicar.addEventListener("click", multiplicar);
+            btnDividir.addEventListener("click", dividir);
+            
+            var a = Number.parseInt(valorA.value);
+            var b = Number.parseInt(valorB.value);
+
+            function somar() {
+                result.innerHTML = a + b;
+            }
+
+            function subtrair() {
+                result.innerHTML = a - b;
+            }
+
+            function multiplicar() {
+                result.innerHTML = a * b;
+            }
+
+            function dividir() {
+                result.innerHTML = a / b;
+            }
+        </script>
+    </body>
+</html>
