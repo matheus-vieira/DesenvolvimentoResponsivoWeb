@@ -9,20 +9,55 @@
     <body>
         <input type="text" id="valorA" />
         <input type="text" id="valorB" />
-        <input type="button" id="btnCalcular" value="Somar">
-        <div>O resultado da soma é: <span id="result"></span></div>
+        <input type="button" id="btnSomar" value="Somar">
+        <input type="button" id="btnSubtrair" value="Subtrair">
+        <input type="button" id="btnMultiplicar" value="Multiplicar">
+        <input type="button" id="btnDividir" value="Dividir">
+        <div>O resultado da soma é: <span id="resultSomar"></span></div>
+        <div>O resultado da subtração é: <span id="resultSubtrair"></span></div>
+        <div>O resultado da multiplicação é: <span id="resultMultiplicar"></span></div>
+        <div>O resultado da divisão é: <span id="resultDividir"></span></div>
         <script>
             var valorA = document.getElementById("valorA");
             var valorB = document.getElementById("valorB");
-            var result = document.getElementById("result");
-            var btnCalcular = document.getElementById("btnCalcular");
 
-            btnCalcular.addEventListener("click", somar);
+            var btnSomar = document.getElementById("btnSomar");
+            var btnSubtrair = document.getElementById("btnSubtrair");
+            var btnMultiplicar = document.getElementById("btnMultiplicar");
+            var btnDividir = document.getElementById("btnDividir");
+
+            var resultSomar = document.getElementById("resultSomar");
+            var resultSubtrair = document.getElementById("resultSubtrair");
+            var resultMultiplicar = document.getElementById("resultMultiplicar");
+            var resultDividir = document.getElementById("resultDividir");
+
+            btnSomar.addEventListener("click", somar);
+            btnSubtrair.addEventListener("click", subtrair);
+            btnMultiplicar.addEventListener("click", multiplicar);
+            btnDividir.addEventListener("click", dividir);
 
             function somar() {
                 var a = Number.parseInt(valorA.value);
                 var b = Number.parseInt(valorB.value);
-                result.innerHTML = b + a;
+                resultSomar.innerHTML = a + b;
+            }
+
+            function subtrair() {
+                var a = Number.parseInt(valorA.value);
+                var b = Number.parseInt(valorB.value);
+                resultSubtrair.innerHTML = a - b;
+            }
+
+            function multiplicar() {
+                var a = Number.parseInt(valorA.value);
+                var b = Number.parseInt(valorB.value);
+                resultMultiplicar.innerHTML = a * b;
+            }
+
+            function dividir() {
+                var a = Number.parseInt(valorA.value);
+                var b = Number.parseInt(valorB.value);
+                resultDividir.innerHTML = a / b;
             }
         </script>
     </body>

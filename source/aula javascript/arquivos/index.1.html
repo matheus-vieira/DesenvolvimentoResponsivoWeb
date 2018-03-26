@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Qualquer</title>
+        <script>
+            var valorA = document.getElementById("valorA");
+            var valorB = document.getElementById("valorB");
+            var result = document.getElementById("result");
+            var btnCalcular = document.getElementById("btnCalcular");
+
+            btnCalcular.addEventListener("click", somar);
+
+            function somar() {
+                var a = Number.parseInt(valorA.value);
+                var b = Number.parseInt(valorB.value);
+                result.innerHTML = b + a;
+            }
+        </script>
+    </head>
+    <body>
+        <input type="text" id="valorA" />
+        <input type="text" id="valorB" />
+        <input type="button" id="btnCalcular" value="Somar">
+        <div>O resultado da soma é: <span id="result"></span></div>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Qualquer</title>
+    </head>
+    <body>
+        <input type="text" id="valorA" />
+        <input type="text" id="valorB" />
+        <input type="button" id="btnSomar" value="Somar">
+        <input type="button" id="btnSubtrair" value="Subtrair">
+        <input type="button" id="btnMultiplicar" value="Multiplicar">
+        <input type="button" id="btnDividir" value="Dividir">
+        <div>O resultado é: <span id="result"></span></div>
+        <script>
+            var valorA = document.getElementById("valorA");
+            var valorB = document.getElementById("valorB");
+
+            var btnSomar = document.getElementById("btnSomar");
+            var btnSubtrair = document.getElementById("btnSubtrair");
+            var btnMultiplicar = document.getElementById("btnMultiplicar");
+            var btnDividir = document.getElementById("btnDividir");
+
+            var result = document.getElementById("result");
+
+            btnSomar.addEventListener("click", function () {
+                atualizeValores(somar);
+            });
+            btnSubtrair.addEventListener("click", function () {
+                atualizeValores(subtrair);
+            });
+            btnMultiplicar.addEventListener("click", function () {
+                atualizeValores(multiplicar);
+            });
+            btnDividir.addEventListener("click", function () {
+                atualizeValores(dividir);
+            });
+
+            function mostraErro(mensagem) {
+                console.log(mensagem);
+                alert(mensagem);
+            }
+
+            function atualizeValores(fn) {
+                var a = Number.parseInt(valorA.value);
+                if (Number.isNaN(a)) {
+                    mostraErro("Valor A não é um número válido");
+                    return;
+                }
+
+                var b = Number.parseInt(valorB.value);
+                if (Number.isNaN(b))  {
+                    mostraErro("Valor B não é um número válido");
+                    return;
+                }
+
+                var res = fn(a, b);
+
+                result.innerHTML = res;
+            }
+
+            function somar(a, b) {
+                return a + b;
+            }
+
+            function subtrair(a, b) {
+                return a - b;
+            }
+
+            function multiplicar(a, b) {
+                return a * b;
+            }
+
+            function dividir(a, b) {
+                if (b == 0) {
+                    mostraErro("Não é possível dividir por 0 (zero)");
+                    return 0;
+                }
+                return a / b;
+            }
+        </script>
+    </body>
+</html>
