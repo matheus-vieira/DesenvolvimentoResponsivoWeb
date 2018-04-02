@@ -37,4 +37,5 @@ function somaDiagonalPrincipal() {
 }
 
 function somaDiagonalSecundaria() {
+    // implementar esse método
 }
