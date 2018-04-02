@@ -1,44 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Calculadora</title>
 </head>
+
 <body>
-    <input type="text"
-        readonly="readonly"
-        disabled="disabled" />
+    <input type="text" id="txtOperacao" readonly="readonly" disabled="disabled" />
     <br />
-    <input type="text"
-        readonly="readonly"
-        disabled="disabled"
-        placeholder="informe o valor aqui" />
+    <input type="text" id="txtResult" readonly="readonly" disabled="disabled" placeholder="informe o valor aqui" />
     <br />
     <input type="button" value="CE" />
     <input type="button" value="C" />
     <input type="button" value="&lArr;" />
-    <input type="button" value="&sol;" />
+    <input type="button" value="/" class="operacoes" />
     <br />
-    <input type="button" value="7" />
-    <input type="button" value="8" />
-    <input type="button" value="9" />
-    <input type="button" value="&times;" />
+    <input type="button" value="7" class="numeros" />
+    <input type="button" value="8" class="numeros" />
+    <input type="button" value="9" class="numeros" />
+    <input type="button" value="*" class="operacoes" />
     <br />
-    <input type="button" value="4" />
-    <input type="button" value="5" />
-    <input type="button" value="6" />
-    <input type="button" value="&minus;" />
+    <input type="button" value="4" class="numeros" />
+    <input type="button" value="5" class="numeros" />
+    <input type="button" value="6" class="numeros" />
+    <input type="button" value="-" class="operacoes" />
     <br />
-    <input type="button" value="3" />
-    <input type="button" value="2" />
-    <input type="button" value="1" />
-    <input type="button" value="&plus;" />
+    <input type="button" value="3" class="numeros" />
+    <input type="button" value="2" class="numeros" />
+    <input type="button" value="1" class="numeros" />
+    <input type="button" value="+" class="operacoes" />
     <br />
-    <input type="button" value="&plusmn;" />
-    <input type="button" value="0" />
-    <input type="button" value="&comma;" />
-    <input type="button" value="&equals;" />
+    <input type="button" value="+-" id="btnInverter" />
+    <input type="button" value="0" class="numeros" />
+    <input type="button" value="&comma;" class="numeros" />
+    <input type="button" value="&equals;" class="executar" />
+    <script>
+        var btnNumeros = document.getElementsByClassName("numeros");
+        var btnOperacoes = document.getElementsByClassName("operacoes");
+        var btnExecutar = document.getElementsByClassName("executar");
+        var btnInverter = document.getElementById("btnInverter");
+        btnInverter.addEventListener("click", executarInverter);
+
+        var txtOperacao = document.getElementById("txtOperacao");
+        var txtResult = document.getElementById("txtResult");
+
+        var operandos = [];
+        var operador = "";
+        var indice = 0;
+        var clear = true;
+
+        for (let i = 0; i < btnNumeros.length; i++) {
+            const btn = btnNumeros[i];
+            btn.addEventListener("click", numeros);
+        }
+
+        for (let i = 0; i < btnOperacoes.length; i++) {
+            const btn = btnOperacoes[i];
+            btn.addEventListener("click", operacoes);
+        }
+
+        for (let i = 0; i < btnExecutar.length; i++) {
+            const btn = btnExecutar[i];
+            btn.addEventListener("click", executar);
+        }
+
+        function numeros(e) {
+            if (this.value == ",")
+                if (operador.indexOf(",") > -1)
+                    return;
+
+            // operador = operador + this.value;
+            operador += this.value;
+
+            if (clear)
+                txtOperacao.value = txtResult.value = "";
+
+            clear = false;
+
+            txtOperacao.value += this.value;
+            txtResult.value += this.value;
+
+            operandos[indice] = operador;
+        }
+
+        function operacoes(e) {
+            var fn;
+            switch (this.value) {
+                case "/": fn = dividir; break;
+                case "*": fn = multiplicar; break;
+                case "-": fn = subtrair; break;
+                default: fn = somar; break;
+            }
+
+            txtOperacao.value += this.value;
+            txtResult.value += this.value;
+            indice = 2;
+            operador = "";
+            operandos[1] = fn;
+        }
+
+        function executar(e) {
+            var a = Number.parseFloat(operandos[0].replace(",", "."));
+            var b = Number.parseFloat(operandos[2].replace(",", "."));
+            var fn = operandos[1];
+
+            var result = fn(a, b);
+            txtResult.value = result.toString().replace(".", ",");
+            indice = 0;
+            operandos = [];
+            clear = true;
+        }
+
+        function executarInverter(e) {
+            if (operandos[1] && operandos[2])
+                executar();
+
+            operandos[0] = txtResult.value;
+            operandos[1] = multiplicar;
+            operandos[2] = "-1";
+            executar();
+        }
+
+        function dividir(a, b) {
+            if (b == 0)
+                return NaN;
+            return a / b;
+        }
+
+        function multiplicar(a, b) {
+            return a * b;
+        }
+
+        function subtrair(a, b) {
+            return a - b;
+        }
+
+        function somar(a, b) {
+            return a + b;
+        }
+
+        function inverter(a) {
+            return a * -1;
+        }
+    </script>
 </body>
+
 </html>
