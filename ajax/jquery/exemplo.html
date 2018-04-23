@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <button id="btnPeoplePrevious">Busca Personagens Anteriores</button>
+    <button id="btnPeopleNext">Busca Personagens Próximos</button>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script>
+        $('#btnPeopleNext').on("click", function () {
+            var btn = this;
+            btn.urlNext = btn.urlNext || "https://swapi.co/api/people";
+            callPeople(btn.urlNext, function (data) {
+                btn.urlNext = data.next;
+                console.log(data);
+            });
+        });
+        $('#btnPeoplePrevious').on("click", function () {
+            var btn = this;
+            btn.urlPrevious = btn.urlPrevious || "https://swapi.co/api/people";
+            callPeople(btn.urlPrevious, function (data) {
+                btn.urlPrevious = data.previous;
+                console.log(data);
+            });
+        });
+
+        function callPeople(url, success) {
+            $.ajax({
+                url: url,
+                success: success
+            });
+        }
+
+        // function MeujQuery(str) {
+        //     return document.getElementById(str);
+        // }
+        // MeujQuery.ajax = function (obj) {
+        //     console.log("chamada ajax");
+        // }
+        // function Pessoa(nome, sobreNome) {
+        //     if (!(this instanceof (Pessoa)))
+        //         return new Pessoa(nome, sobreNome);
+        //     this.nome = nome || "";
+        //     this.sobreNome = sobreNome || "";
+        // }
+        // Pessoa.metodoDeClasse = function () {
+        //     return "método de classe";
+        // }
+        // Pessoa.prototype.nomeCompleto = function () {
+        //     return `${this.nome} ${this.sobreNome}`;
+        // }
+        // var matheus = new Pessoa("Matheus", "Costa Vieira");
+        // console.log(matheus.nomeCompleto());
+
+        // var matheus2 = Pessoa("Matheus", "Costa Vieira");
+    </script>
+</body>
+
+</html>
