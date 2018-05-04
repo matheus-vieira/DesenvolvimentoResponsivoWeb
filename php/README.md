@@ -23,7 +23,7 @@ Exemplo
 </html>
 ```
 
-Para executá-la precisamos de um servidor.
+Próximos passos:
 
 [Instalação do PHP no linux]({{ 'php/instalando' | relative_url }})
 
