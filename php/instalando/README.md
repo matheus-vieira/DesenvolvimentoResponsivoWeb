@@ -1,6 +1,6 @@
 # Instalar o PHP
 
-Estamos seguindo a instalação baseando em um Ubuntu. Para mais informações consulta o [Manual do PHP](https://secure.php.net/manual/pt_BR/install.php)
+Estamos seguindo a instalação baseando em um Ubuntu. Para mais informações consulte o [Manual do PHP](https://secure.php.net/manual/pt_BR/install.php)
 
 Primeiro verificamos se o PHP está instalado
 
@@ -175,3 +175,25 @@ update-alternatives: using /usr/bin/phar.phar7.0 to provide /usr/bin/phar.phar (
 
 Creating config file /etc/php/7.0/cli/php.ini with new version
 ```
+
+Por fim temos podemos verificar a instalação novamente
+
+```bash
+php -v
+```
+
+Saída
+
+```bash
+PHP 7.0.28-0ubuntu0.16.04.1 (cli) ( NTS )
+Copyright (c) 1997-2017 The PHP Group
+Zend Engine v3.0.0, Copyright (c) 1998-2017 Zend Technologies
+    with Zend OPcache v7.0.28-0ubuntu0.16.04.1, Copyright (c) 1999-2017, by Zend Technologies
+```
+Ou
+
+```bash
+php -i
+```
+
+Nesse caso temos todas as informações sobre a instalação.
