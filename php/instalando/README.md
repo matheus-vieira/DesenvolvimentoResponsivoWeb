@@ -197,3 +197,5 @@ php -i
 ```
 
 Nesse caso temos todas as informações sobre a instalação.
+
+Para melhor visualização utilização a função `phpinfo()`.
