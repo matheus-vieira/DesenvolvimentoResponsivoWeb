@@ -1,6 +1,8 @@
 # Instalar o PHP
 
-Primeiro verificamos se o PHP está instalado  
+Estamos seguindo a instalação baseando em um Ubuntu. Para mais informações consulta o [Manual do PHP](https://secure.php.net/manual/pt_BR/install.php)
+
+Primeiro verificamos se o PHP está instalado
 
 ```bash
 php -v
@@ -172,77 +174,4 @@ update-alternatives: using /usr/bin/phar7.0 to provide /usr/bin/phar (phar) in a
 update-alternatives: using /usr/bin/phar.phar7.0 to provide /usr/bin/phar.phar (phar.phar) in auto mode
 
 Creating config file /etc/php/7.0/cli/php.ini with new version
-```
-
-Crie uma pasta chamada `public_html` e acesse ela
-
-```bash
-mkdir public_html && cd public_html
-```
-
-Crie um arquivo chamado `index.php` e chame a função `phpinfo()`
-
-```bash
-echo "<?php phpinfo(); ?>" > index.php
-```
-
-O php vem com um servidor embutido para executá-lo chame o comando abaixo:
-
-```bash
-php -S localhost:8000
-```
-
-Saída
-
-```bash
-PHP 7.0.28-0ubuntu0.16.04.1 Development Server started at Thu May  3 22:38:47 2018
-Listening on http://localhost:8000
-Document root is /home/opet/public_html
-Press Ctrl-C to quit.
-```
-
-Agora podemos alterar para podermos ter acesso a algo mais substancial, por exemplo:
-
-Criaremos um [array multidimensional](https://secure.php.net/manual/pt_BR/language.types.array.php) e retornaremos um objeto do tipo JSON com a função [`json_encode`](http://php.net/manual/pt_BR/function.json-encode.php)
-
-> Foi omitido as tags de abertura do PHP `<?php` e `?>`
-
-```php
-  $array = array(
-   'name' => 'Luke Skywalker',
-   'height' => '172',
-   'mass' => '77',
-   'hair_color' => 'blond',
-   'skin_color' => 'fair',
-   'eye_color' => 'blue',
-   'birth_year' => '19BBY',
-   'gender' => 'male',
-   'homeworld' => 'https://swapi.co/api/planets/1/',
-   'films' => 
-    array (
-      0 => 'https://swapi.co/api/films/2/',
-      1 => 'https://swapi.co/api/films/6/',
-      2 => 'https://swapi.co/api/films/3/',
-      3 => 'https://swapi.co/api/films/1/',
-      4 => 'https://swapi.co/api/films/7/',
-    ),
-    'species' => 
-    array (
-      0 => 'https://swapi.co/api/species/1/',
-    ),
-    'vehicles' => 
-    array (
-      0 => 'https://swapi.co/api/vehicles/14/',
-      1 => 'https://swapi.co/api/vehicles/30/',
-    ),
-    'starships' => 
-    array (
-      0 => 'https://swapi.co/api/starships/12/',
-      1 => 'https://swapi.co/api/starships/22/',
-    ),
-    'created' => '2014-12-09T13:50:51.644000Z',
-    'edited' => '2014-12-20T21:17:56.891000Z',
-    'url' => 'https://swapi.co/api/people/1/',
-  );
-  echo json_encode($array);
 ```
