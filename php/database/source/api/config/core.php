@@ -2,9 +2,14 @@
     // show error reporting
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
+
+    $protocol = 'http';
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") {
+        $protocol = "https";
+    }
     
     // home page url
-    $home_url="http://localhost/api/";
+    $home_url = $protocol . "://" . $_SERVER['HTTP_HOST'] ."/api/";
     
     // page given in URL parameter, default page is one
     $page = isset($_GET['page']) ? $_GET['page'] : 1;

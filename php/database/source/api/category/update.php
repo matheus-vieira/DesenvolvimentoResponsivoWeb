@@ -8,36 +8,34 @@
     
     // include database and object files
     include_once '../config/database.php';
-    include_once '../objects/product.php';
+    include_once '../objects/category.php';
     
     // get database connection
     $database = new Database();
     $db = $database->getConnection();
     
-    // prepare product object
-    $product = new Product($db);
+    // prepare category object
+    $category = new Category($db);
     
-    // get id of product to be edited
+    // get id of category to be edited
     $data = json_decode(file_get_contents("php://input"));
     
-    // set ID property of product to be edited
-    $product->id = $data->id;
+    // set ID property of category to be edited
+    $category->id = $data->id;
     
-    // set product property values
-    $product->name = $data->name;
-    $product->price = $data->price;
-    $product->description = $data->description;
-    $product->category_id = $data->category_id;
+    // set category property values
+    $category->name = $data->name;
+    $category->description = $data->description;
     
-    // update the product
-    if ($product->update()) {
+    // update the category
+    if ($category->update()) {
         echo '{';
-            echo '"message": "Product was updated."';
+            echo '"message": "category was updated."';
         echo '}';
     } else {
-        // if unable to update the product, tell the user
+        // if unable to update the category, tell the user
         echo '{';
-            echo '"message": "Unable to update product."';
+            echo '"message": "Unable to update category."';
         echo '}';
     }
 ?>

@@ -9,33 +9,33 @@
     // get database connection
     include_once '../config/database.php';
     
-    // instantiate product object
-    include_once '../objects/product.php';
+    // instantiate category object
+    include_once '../objects/category.php';
     
     $database = new Database();
     $db = $database->getConnection();
     
-    $product = new Product($db);
+    $category = new Category($db);
     
     // get posted data
     $data = json_decode(file_get_contents("php://input"));
+
+    var_dump($data);
     
-    // set product property values
-    $product->name = $data->name;
-    $product->price = $data->price;
-    $product->description = $data->description;
-    $product->category_id = $data->category_id;
-    $product->created = date('Y-m-d H:i:s');
+    // set category property values
+    $category->name = $data->name;
+    $category->description = $data->description;
+    $category->created = date('Y-m-d H:i:s');
     
-    // create the product
-    if ($product->create()) {
+    // create the category
+    if ($category->create()) {
         echo '{';
-            echo '"message": "Product was created."';
+            echo '"message": "Category was created."';
         echo '}';
     } else {
-        // if unable to create the product, tell the user
+        // if unable to create the category, tell the user
         echo '{';
-            echo '"message": "Unable to create product."';
+            echo '"message": "Unable to create category."';
         echo '}';
     }
 ?>

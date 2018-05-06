@@ -9,30 +9,30 @@
     
     // include database and object file
     include_once '../config/database.php';
-    include_once '../objects/product.php';
+    include_once '../objects/category.php';
     
     // get database connection
     $database = new Database();
     $db = $database->getConnection();
     
-    // prepare product object
-    $product = new Product($db);
+    // prepare category object
+    $category = new Category($db);
     
-    // get product id
+    // get category id
     $data = json_decode(file_get_contents("php://input"));
     
-    // set product id to be deleted
-    $product->id = $data->id;
+    // set category id to be deleted
+    $category->id = $data->id;
     
-    // delete the product
-    if ($product->delete()) {
+    // delete the category
+    if ($category->delete()) {
         echo '{';
-            echo '"message": "Product was deleted."';
+            echo '"message": "Category was deleted."';
         echo '}';
     } else {
-        // if unable to delete the product
+        // if unable to delete the category
         echo '{';
-            echo '"message": "Unable to delete product."';
+            echo '"message": "Unable to delete category."';
         echo '}';
     }
 ?>

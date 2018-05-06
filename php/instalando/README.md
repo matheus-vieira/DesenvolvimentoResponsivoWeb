@@ -18,7 +18,7 @@ Try: sudo apt install <selected package>
 ```
 
 ```bash
-opet@RB-LAB102B-PROF:~$ sudo apt install php7.0-cli
+sudo apt install php7.0-cli
 ```
 
 Saída
@@ -198,4 +198,4 @@ php -i
 
 Nesse caso temos todas as informações sobre a instalação.
 
-Para melhor visualização utilização a função `phpinfo()`.
+Para melhor visualização utilizaremos a função `phpinfo()`.

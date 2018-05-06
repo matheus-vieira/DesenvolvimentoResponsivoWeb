@@ -7,28 +7,28 @@
     include_once '../config/core.php';
     include_once '../shared/utilities.php';
     include_once '../config/database.php';
-    include_once '../objects/product.php';
+    include_once '../objects/category.php';
     
     // utilities
     $utilities = new Utilities();
     
-    // instantiate database and product object
+    // instantiate database and category object
     $database = new Database();
     $db = $database->getConnection();
     
     // initialize object
-    $product = new Product($db);
+    $category = new Category($db);
     
-    // query products
-    $stmt = $product->readPaging($from_record_num, $records_per_page);
+    // query categorys
+    $stmt = $category->readPaging($from_record_num, $records_per_page);
     $num = $stmt->rowCount();
     
     // check if more than 0 record found
     if ($num > 0) {
-        // products array
-        $products_arr=array();
-        $products_arr["records"]=array();
-        $products_arr["paging"]=array();
+        // categorys array
+        $categories_arr = array();
+        $categories_arr["records"]=array();
+        $categories_arr["paging"]=array();
     
         // retrieve our table contents
         // fetch() is faster than fetchAll()
@@ -39,28 +39,25 @@
             // just $name only
             extract($row);
     
-            $product_item = array(
+            $category_item = array(
                 "id" => $id,
                 "name" => $name,
-                "description" => html_entity_decode($description),
-                "price" => $price,
-                "category_id" => $category_id,
-                "category_name" => $category_name
+                "description" => html_entity_decode($description)
             );
     
-            array_push($products_arr["records"], $product_item);
+            array_push($categories_arr["records"], $category_item);
         }
     
         // include paging
-        $total_rows=$product->count();
-        $page_url="{$home_url}product/read_paging.php?";
+        $total_rows=$category->count();
+        $page_url="{$home_url}category/read_paging.php?";
         $paging=$utilities->getPaging($page, $total_rows, $records_per_page, $page_url);
-        $products_arr["paging"]=$paging;
+        $categories_arr["paging"]=$paging;
     
-        echo json_encode($products_arr);
+        echo json_encode($categories_arr);
     } else {
         echo json_encode(
-            array("message" => "No products found.")
+            array("message" => "No categories found.")
         );
     }
 ?>

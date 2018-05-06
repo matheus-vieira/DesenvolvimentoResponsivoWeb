@@ -5,49 +5,51 @@
     
     // include database and object files
     include_once '../config/database.php';
-    include_once '../objects/product.php';
+    include_once '../objects/category.php';
     
-    // instantiate database and product object
+    // instantiate database and category object
     $database = new Database();
     $db = $database->getConnection();
     
     // initialize object
-    $product = new Product($db);
+    $category = new Category($db);
     
-    // query products
-    $stmt = $product->read();
+    // get keywords
+    $keywords = isset($_GET["s"]) ? $_GET["s"] : "";
+    
+    // query categorys
+    $stmt = $category->search($keywords);
     $num = $stmt->rowCount();
     
     // check if more than 0 record found
     if ($num > 0) {
-        // products array
-        $products_arr=array();
-        $products_arr["records"]=array();
+    
+        // categorys array
+        $categories_arr=array();
+        $categories_arr["records"]=array();
     
         // retrieve our table contents
         // fetch() is faster than fetchAll()
         // http://stackoverflow.com/questions/2770630/pdofetchall-vs-pdofetch-in-a-loop
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             // extract row
             // this will make $row['name'] to
             // just $name only
             extract($row);
     
-            $product_item=array(
+            $category_item = array(
                 "id" => $id,
                 "name" => $name,
-                "description" => html_entity_decode($description),
-                "price" => $price,
-                "category_id" => $category_id,
-                "category_name" => $category_name
+                "description" => html_entity_decode($description)
             );
     
-            array_push($products_arr["records"], $product_item);
+            array_push($categories_arr["records"], $category_item);
         }
-        echo json_encode($products_arr);
+    
+        echo json_encode($categories_arr);
     } else {
         echo json_encode(
-            array("message" => "No products found.")
+            array("message" => "No categories found.")
         );
     }
 ?>
