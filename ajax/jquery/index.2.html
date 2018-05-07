@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <button id="btnPeoplePrevious">Busca Personagens Anteriores</button>
+    <button id="btnPeopleNext">Busca Personagens Próximos</button>
+    <table class="table table-dark table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Height</th>
+                <th scope="col">Mass</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tbodyPeople"></tbody>
+    </table>
+    <!-- Modal -->
+    <div class="modal fade" id="modalDetails" tabindex="-1" role="dialog" aria-labelledby="modalDetailsLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDetailsLabel">People Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="divModalDetailsBody"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <script>
+        var $tbodyPeople = $("#tbodyPeople");
+        var $modalDetails = $('#modalDetails');
+        var $divModalDetailsBody = $("#divModalDetailsBody");
+        $('#btnPeopleNext').on("click", function () {
+            var btn = this;
+            btn.urlNext = btn.urlNext || "https://swapi.co/api/people";
+            callPeople(btn.urlNext, function (data) {
+                btn.urlNext = data.next;
+                buildTable(data.results);
+            });
+        });
+        $('#btnPeoplePrevious').on("click", function () {
+            var btn = this;
+            btn.urlPrevious = btn.urlPrevious || "https://swapi.co/api/people";
+            callPeople(btn.urlPrevious, function (data) {
+                btn.urlPrevious = data.previous;
+                buildTable(data.results);
+            });
+        });
+
+        function buildTable(results) {
+            $tbodyPeople.empty();
+            for (var i = 0; i < results.length; i++) {
+                const p = results[i];
+                var $tr = $("<tr>");
+                var $tdName = $("<td>");
+                var $tdHeight = $("<td>");
+                var $tdMass = $("<td>");
+                var $tdActions = $("<td>");
+
+                $tdName.text(p.name);
+                $tdHeight.text(p.height);
+                $tdMass.text(p.mass);
+                $tr.append($tdName);
+                $tr.append($tdHeight);
+                $tr.append($tdMass);
+                $tr.append($tdActions);
+
+                addActions($tdActions, p);
+
+                $tbodyPeople.append($tr);
+            }
+        }
+
+        function addActions($td, p) {
+            $btnModal = addBtnModal(p);
+            $td.append($btnModal);
+        }
+
+        function addBtnModal(p) {
+            var $btnModal = $('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDetails">');
+            $btnModal.data("people", p);
+            $btnModal.text("Details");
+            return $btnModal;
+        }
+
+        $modalDetails.on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var p = button.data("people");
+            var div = setModalData(p);
+            var modal = $(this)
+            modal.find('.modal-title').text('Details for ' + p.name);
+            modal.find('.modal-body')
+                .empty()
+                .append(div);
+        });
+
+        function setModalData(p) {
+            var $div = $("<div>");
+            setProperties(p, $div, [
+                "homeworld",
+                "species",
+                "vehicles",
+                "starships",
+                "created",
+                "edited",
+                "url"
+            ]);
+
+            var $homeWorld = $("<div>");
+            var $films = $("<div>");
+            var $vehicles = $("<div>");
+            setHomeWorld(p, $homeWorld);
+            setFilms(p, $films);
+            setVehicles(p, $vehicles);
+
+            $div.append($homeWorld);
+            $div.append($films);
+            $div.append($vehicles);
+
+            return $div;
+        }
+
+        function setProperties(p, $div, ignoreProps = []) {
+            Object.keys(p).forEach(key => {
+                if (ignoreProps.indexOf(key) > -1)
+                    return;
+
+                if (p.hasOwnProperty(key)) {
+                    if (typeof (p[key]) !== "string")
+                        return;
+
+                    if ($div.text().length > 0)
+                        $div.append("<br />");
+
+                    let $spanLabel = $("<span class=\"font-weight-bold\">");
+                    let $span = $("<span>");
+
+                    $spanLabel.text(propToLabel(key));
+                    $span.text(": " + p[key]);
+
+                    $div.append($spanLabel);
+                    $div.append($span);
+                }
+            });
+        }
+
+        function propToLabel(prop) {
+            prop = prop.replace("_", " ");
+            return toTitleCase(prop);
+        }
+        function toTitleCase(str) {
+            return str.replace(/\w\S*/g, function (txt) {
+                var s = txt.charAt(0).toUpperCase();
+                s += txt.substr(1).toLowerCase()
+                return s;
+            });
+        }
+
+        function setHomeWorld(p, $element) {
+            let $spanLabel = $("<span class=\"font-weight-bold\">");
+            let $span = $("<span>");
+            callPeople(p.homeworld, function (data) {
+                $span.text(": " + data.name);
+            });
+            $spanLabel.text("Home World");
+
+            $element.append($spanLabel);
+            $element.append($span);
+        }
+
+        function setFilms(p, $element) {
+            let $spanLabel = $("<span class=\"font-weight-bold\">");
+            let $ul = $("<ul>");
+            p.films.forEach(f => callPeople(f, function (data) {
+                var li = $("<li>");
+                li.append(data.title);
+                $ul.append(li);
+            }));
+            $spanLabel.text("Films");
+
+            $element.append($spanLabel);
+            $element.append($ul);
+        }
+
+        function setVehicles(p, $element) {
+            let $spanLabel = $("<span class=\"font-weight-bold\">");
+            let $ul = $("<ul>");
+            p.vehicles.forEach(f => callPeople(f, function (data) {
+                var li = $("<li>");
+                li.append(data.name + " - " + data. model);
+                $ul.append(li);
+            }));
+            $spanLabel.text("Vehicles");
+
+            $element.append($spanLabel);
+            $element.append($ul);
+        }
+
+        function callPeople(url, success) {
+            $.ajax({
+                url: url,
+                success: success
+            });
+        }
+    </script>
+</body>
+
+</html>

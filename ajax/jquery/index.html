@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <button id="btnPeoplePrevious">Busca Personagens Anteriores</button>
+    <button id="btnPeopleNext">Busca Personagens Próximos</button>
+    <table class="table table-dark table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Height</th>
+                <th scope="col">Mass</th>
+                <th scope="col">Films</th>
+            </tr>
+        </thead>
+        <tbody id="tbodyPeople"></tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <script>
+        var $tbodyPeople = $("#tbodyPeople");
+        var $modalDetails = $('#modalDetails');
+        var $divModalDetailsBody = $("#divModalDetailsBody");
+        $('#btnPeopleNext').on("click", function () {
+            var btn = this;
+            btn.urlNext = btn.urlNext || "https://swapi.co/api/people";
+            callPeople(btn.urlNext, function (data) {
+                btn.urlNext = data.next;
+                buildTable(data.results);
+            });
+        });
+        $('#btnPeoplePrevious').on("click", function () {
+            var btn = this;
+            btn.urlPrevious = btn.urlPrevious || "https://swapi.co/api/people";
+            callPeople(btn.urlPrevious, function (data) {
+                btn.urlPrevious = data.previous;
+                buildTable(data.results);
+            });
+        });
+
+        function buildTable(results) {
+            $tbodyPeople.empty();
+            for (var i = 0; i < results.length; i++) {
+                const p = results[i];
+                var $tr = $("<tr>");
+                var $tdName = $("<td>");
+                var $tdHeight = $("<td>");
+                var $tdMass = $("<td>");
+                var $tdFilms = $("<td>");
+
+                $tdName.text(p.name);
+                $tdHeight.text(p.height);
+                $tdMass.text(p.mass);
+                $tr.append($tdName);
+                $tr.append($tdHeight);
+                $tr.append($tdMass);
+                $tr.append($tdFilms);
+
+                p.films.forEach(f => callPeople(f, function (data) {
+                    var text = data.title;
+                    if ($tdFilms.text().length > 0)
+                        text = ", " + data.title;
+                    $tdFilms.append(text);
+                }));
+
+                $tbodyPeople.append($tr);
+            }
+        }
+
+        function addActions($td, p) {
+            $btnModal = addBtnModal(p);
+            $td.append($btnModal);
+        }
+
+        function addBtnModal(p) {
+            var $btnModal = $('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDetails">');
+            $btnModal.data("people", p);
+            $btnModal.text("Details");
+            return $btnModal;
+        }
+
+        $modalDetails.on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var p = button.data("people");
+            var div = setModalData(p);
+            var modal = $(this)
+            modal.find('.modal-title').text('Details for ' + p.name);
+            modal.find('.modal-body')
+                .empty()
+                .append(div);
+        });
+
+        function setModalData(p) {
+            var $div = $("<div>");
+            var $spanNomeLabel = $("<span class=\"font-weight-bold\">");
+            var $spanNome = $("<span>");
+            var $homeWorldLabel = $("<span class=\"font-weight-bold\">");
+            var $homeWorld = $("<span>");
+            var $filmsLabel = $("<span class=\"font-weight-bold\">");
+            var $films = $("<span>");
+
+            $spanNomeLabel.text("Hair Color: ");
+            $homeWorldLabel.text("Home World: ");
+            $filmsLabel.text("Films: ");
+            $spanNome.text(p.hair_color);
+
+            $div.append($spanNomeLabel);
+            $div.append($spanNome);
+            $div.append("<br />");
+            $div.append($homeWorldLabel);
+            $div.append($homeWorld);
+            $div.append("<br />");
+            $div.append($filmsLabel);
+            $div.append($films);
+            setHomeWorld(p, $homeWorld);
+            setFilms(p, $films);
+
+            return $div;
+        }
+
+        function setHomeWorld(p, $element) {
+            callPeople(p.homeworld, function (data) {
+                $element.text(data.name);
+            });
+        }
+
+        function setFilms(p, $element) {
+            p.films.forEach(f => callPeople(f, function (data) {
+                var text = data.title;
+                if ($element.text().length > 0)
+                    text = ", " + data.title;
+                $element.append(text);
+            }));
+        }
+
+        function callPeople(url, success) {
+            $.ajax({
+                url: url,
+                success: success
+            });
+        }
+    </script>
+</body>
+
+</html>
