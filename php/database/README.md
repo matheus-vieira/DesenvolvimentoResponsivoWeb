@@ -24,6 +24,8 @@ sudo apt-get update
 sudo apt-get install mysql-server
 ```
 
+Saída
+
 ```bash
 [sudo] password for mvieira:
 Reading package lists... Done
@@ -185,6 +187,11 @@ Ao final inicie o MySQL com o comando:
 
 ```bash
 sudo /etc/init.d/mysql start
+```
+
+Saída
+
+```bash
  * Starting MySQL database server mysqld
 No directory, logging in with HOME=/
                                                                                                                                                                                     [ OK ]
@@ -192,6 +199,11 @@ No directory, logging in with HOME=/
 
 ```bash
 mysql --version
+```
+
+Saída
+
+```bash
 mysql  Ver 14.14 Distrib 5.7.22, for Linux (x86_64) using  EditLine wrapper
 ```
 
@@ -199,6 +211,11 @@ mysql  Ver 14.14 Distrib 5.7.22, for Linux (x86_64) using  EditLine wrapper
 
 ```bash
 mysql_secure_installation
+```
+
+Saída
+
+```bash
 Securing the MySQL server deployment.
 
 Enter password for user root:
@@ -354,3 +371,4 @@ Do you want to continue? [Y/n]
 
 Pression `y` e aguarde o término da instalação
 
+[Criando um banco de dados]({{ 'php/database/criando-banco' | relative_url }})

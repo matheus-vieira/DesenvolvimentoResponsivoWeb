@@ -1,6 +1,18 @@
 # [Rodando o PHP](https://secure.php.net/manual/pt_BR/features.commandline.webserver.php)
 
-Crie uma pasta chamada `public_html` e acesse ela
+Crie uma pasta chamada `public_html`
+
+```bash
+mkdir public_html
+```
+
+E acesse a nova pasta criada
+
+```bash
+cd public_html
+```
+
+Os comandos acima podem ser executados de uma só vez:
 
 ```bash
 mkdir public_html && cd public_html

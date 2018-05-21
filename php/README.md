@@ -30,3 +30,7 @@ Próximos passos:
 [Utilizando um servidor]({{ 'php/servidor' | relative_url }})
 
 [Criando informações customizadas]({{ 'php/criando' | relative_url }})
+
+[Banco de dados]({{ 'php/database' | relative_url }})
+
+[Comandos resumo]({{ 'php/instalando/resumo' | relative_url }})
