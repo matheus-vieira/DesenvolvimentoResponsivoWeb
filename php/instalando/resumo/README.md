@@ -32,33 +32,13 @@ sudo /etc/init.d/mysql restart
 mysql_secure_installation
 ```
 
-```bash
-y
-```
+Utilizar plugin de validação de senha `y`
 
-```bash
-0
-```
+Nível de segurança `0`
 
-```bash
-no
-```
+Alterar senha do usuário *root* `n`
 
-```bash
-y
-```
-
-```bash
-y
-```
-
-```bash
-y
-```
-
-```bash
-y
-```
+Após digitar `y` para as perguntas seguintes
 
 ```bash
 sudo apt-get install php-mysql
