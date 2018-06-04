@@ -13,10 +13,6 @@ php -v
 ## Para a instalação do MySQL utilizar os comandos
 
 ```bash
-sudo apt-get update
-```
-
-```bash
 sudo apt-get install mysql-server
 ```
 
@@ -26,6 +22,10 @@ opet
 
 ```bash
 opet
+```
+
+```bash
+sudo /etc/init.d/mysql restart
 ```
 
 ```bash
@@ -58,14 +58,6 @@ y
 
 ```bash
 y
-```
-
-```bash
-sudo /etc/init.d/mysql restart
-```
-
-```bash
-mysqladmin -p -u root version
 ```
 
 ```bash
