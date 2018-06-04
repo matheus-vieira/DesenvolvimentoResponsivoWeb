@@ -38,13 +38,13 @@ mysql> GRANT ALL PRIVILEGES ON * . * TO 'ecommerce_user'@'localhost';
 Crie um banco de dados
 
 ```bash
-mysql> create database ecommerce
+mysql> create database ecommerce;
 ```
 
 Agora devemos informar ao MySQL qual bando de dados iremos utilizar
 
 ```bash
-mysql> use ecommerce
+mysql> use ecommerce;
 ```
 
 Crie a tabela de categorias
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `created` datetime NOT NULL,
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19;
 ```
 
 Adicione alguns dados
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `created` datetime NOT NULL,
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=65 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=65;
 ```
 
 Adicione alguns produtos
