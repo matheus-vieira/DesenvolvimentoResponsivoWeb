@@ -41,7 +41,8 @@ $(document).ready(function () {
     // will run if 'create product' form was submitted
     $(document).on('submit', '#update-product-form', function () {
         // get form data will be here 
-        updateProductSubmit($(this));
+        var $form = $(this);
+        updateProductSubmit($form);
 
         return false;
     });
@@ -117,7 +118,7 @@ function updateProductSubmit($form) {
         data: form_data,
         success: function (result) {
             // product was created, go back to products list
-            showProducts();
+            showProducts("api/product/read_paging.php");
         },
         error: function (xhr, resp, text) {
             // show error to console

@@ -31,13 +31,12 @@ $(document).ready(function () {
                         data: JSON.stringify({ id: product_id }),
                         success: function (result) {
                             // re-load list of products
-                            showProducts();
+                            showProducts("api/product/read_paging.php");
                         },
                         error: function (xhr, resp, text) {
                             console.log(xhr, resp, text);
                         }
                     });
-
                 }
             }
         });

@@ -21,6 +21,8 @@ $(document).ready(function () {
     $(document).on('submit', '#create-product-form', function () {
         // form data will be here
         createProductSubmit($(this));
+
+        return false;
     });
 });
 
@@ -93,7 +95,8 @@ function createProduct(options) {
 
 function createProductSubmit($form) {
     // get form data
-    var form_data = JSON.stringify($form.serializeObject());// submit form data to api
+    var form_data = JSON.stringify($form.serializeObject());
+    // submit form data to api
     $.ajax({
         url: "api/product/create.php",
         type: "POST",
@@ -101,13 +104,11 @@ function createProductSubmit($form) {
         data: form_data,
         success: function (result) {
             // product was created, go back to products list
-            showProducts();
+            showProducts("api/product/read_paging.php");
         },
         error: function (xhr, resp, text) {
             // show error to console
             console.log(xhr, resp, text);
         }
     });
-
-    return false;
 }

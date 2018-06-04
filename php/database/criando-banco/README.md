@@ -154,3 +154,26 @@ mysql> SELECT * FROM products;
 +----+-------------------------------+----------------------------------+-------+-------------+---------------------+---------------------+
 17 rows in set (0.00 sec)
 ```
+
+# Inner Join
+
+Buscar o nome das categorias
+
+```sql
+SELECT p.name AS 'Product Name',
+       c.name AS 'Category Name'
+  FROM products p
+ INNER JOIN categories c ON p.category_id = c.id;
+```
+
+# Group By
+
+Buscar o nome das categorias
+
+```sql
+SELECT c.name AS 'Category Name',
+       COUNT(c.name) AS 'Quantity'
+  FROM products p
+ INNER JOIN categories c ON p.category_id = c.id
+ GROUP BY c.name;
+```
