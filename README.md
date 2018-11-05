@@ -39,12 +39,12 @@ ao finalizar encaminhe as alterações ao servidor do github
 git push origin master
 ```
 
-[Aula HTML](DesenvolvimentoResponsivoWeb/source/)
+[Aula HTML]({{ 'html' | relative_url }})
 
-[Aula CSS](DesenvolvimentoResponsivoWeb/source/css)
+[Aula CSS]({{ 'css' | relative_url }})
 
-[Aula JS](DesenvolvimentoResponsivoWeb/source/aula%20javascript/)
+[Aula JS]({{ 'source/aula javascript' | relative_url }})
 
-[Aula PHP](DesenvolvimentoResponsivoWeb/source/php)
+[Aula PHP]({{ 'php' | relative_url }})
 
 [Conteúdo Extras](https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books-pt_BR.md#javascript)
