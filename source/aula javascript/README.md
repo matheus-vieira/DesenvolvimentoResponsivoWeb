@@ -6,9 +6,6 @@ Hoje é utilizado para, além da interatividade, criação de robôs com arduino
 
 10 dias para a criação da linguagem.
 
+[Condições em JS]({{ 'source/aula%20javascript/condicoes' | relative_url }})
 
-[Condições em JS](DesenvolvimentoResponsivoWeb/source/aula%20javascript/condicoes)
-
-[Condições em JS]({{ 'aula%20javascript/condicoes' | relative_url }})
-
-[Arrays em JS](DesenvolvimentoResponsivoWeb/source/aula%20javascript/array)
+[Arrays em JS]({{ 'source/aula%20javascript/array' | relative_url }})
