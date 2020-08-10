@@ -9,4 +9,6 @@ Hoje é utilizado para, além da interatividade, criação de robôs com arduino
 
 [Condições em JS](DesenvolvimentoResponsivoWeb/source/aula%20javascript/condicoes)
 
+[Condições em JS]({{ 'aula%20javascript/condicoes' | relative_url }})
+
 [Arrays em JS](DesenvolvimentoResponsivoWeb/source/aula%20javascript/array)
